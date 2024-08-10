@@ -1,8 +1,13 @@
 const NavBar = () => {
   return (
-    <nav className="flex justify-between items-center p-6">
-      <h1 className="text-2xl font-light text-slate-100 font-logo">COSTMATE</h1>
-      <p className="text-slate-300">Good morning...</p>
+    <nav className="flex justify-between items-center p-6 z-10">
+      <img
+        className=" font-logo w-52"
+        src="../../public/CostMate.png"
+        alt=""
+      />
+      {/* <h1 className="text-2xl font-light text-slate-100 font-logo">COSTMATE</h1> */}
+      <p className="text-slate-300 justify-center">Good morning...</p>
       <button className="w-[40px] text-slate-100">
         <svg
           xmlns="http://www.w3.org/2000/svg"
