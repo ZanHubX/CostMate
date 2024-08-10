@@ -2,7 +2,7 @@ import React from 'react'
 
 const App = () => {
   return (
-    <div>update</div>
+    <div>last update</div>
   )
 }
 
