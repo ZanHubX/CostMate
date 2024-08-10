@@ -5,7 +5,7 @@ import Total from "./components/Total";
 
 const App = () => {
   return (
-    <div clasName="p-10">
+    <div>
       <NavBar />
       <Total />
       <Divided />
