@@ -1,7 +1,10 @@
 import { useRef } from "react";
 import { useState } from "react";
+import useStore from "../store/useStore";
 
 const View = () => {
+  const { data } = useStore();
+
   const [selectedDate, setSelectedDate] = useState(
     new Date().toLocaleDateString("en-GB", {
       day: "2-digit",
@@ -11,6 +14,7 @@ const View = () => {
   );
 
   const dateRef = useRef(selectedDate);
+  console.log(data);
 
   const handleChange = (e) => {
     const newDate = new Date(e.target.value).toLocaleDateString("en-GB", {
@@ -31,7 +35,9 @@ const View = () => {
           onChange={handleChange}
         />
       </div>
-      <div></div>
+      <div>
+        <ul></ul>
+      </div>
     </div>
   );
 };
