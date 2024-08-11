@@ -1,3 +1,7 @@
+// Category.js
+import React from "react";
+import useDivided from "../store/useDivided";
+import Empty from "./Empty";
 import React, { useEffect } from "react";
 import useStore from "../store/useStore";
 
@@ -24,6 +28,7 @@ const Category = ({ filteredItems = [] }) => {
         <p className="text-slate-100 font-bold text-xl">{total.toFixed(2)} B</p>
       </div>
       <ul>
+        {filteredItems.length === 0 && <Empty />}
         {filteredItems.map((item) => (
           <li
             className="flex justify-between items-center border-b mt-2 border-slate-100 px-4 py-2 last:border-none"
