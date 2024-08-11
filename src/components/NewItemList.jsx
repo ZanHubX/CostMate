@@ -1,13 +1,15 @@
 import useStore from "../store/useStore";
 import useNewItem from "../store/useNewItem";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, redirect, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const NewItemList = ({ editData }) => {
+const NewItemList = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { editData } = location.state || {};
   console.log(editData);
   const { newData } = useNewItem();
   const { data } = useStore();
-  const navigate = useNavigate();
 
   const handleAddButton = () => {
     if (newData.length > 0) {
