@@ -1,16 +1,25 @@
 import useStore from "../store/useStore";
 import useNewItem from "../store/useNewItem";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const NewItemList = () => {
   const { newData } = useNewItem();
   const { data } = useStore();
+  const navigate = useNavigate();
 
   const handleAddButton = () => {
     if (newData.length > 0) {
       useStore.setState({ data: [...data, ...newData] });
       localStorage.setItem("data", JSON.stringify([...data, ...newData]));
+
+      // I want to go back to home page with react router dom not window location
+      navigate("/");
+    } else {
+      if (confirm("Are you sure you want to go home page?")) {
+        // also here
+        navigate("/");
+      }
     }
 
     // Reset newData List to initial State
@@ -87,7 +96,6 @@ const NewItemList = () => {
       </div>
       <div className="grid grid-cols-2 gap-3 mt-4">
         <Link
-          to={"/"}
           onClick={handleAddButton}
           className="bg-green-700 text-slate-100 px-4 py-2 rounded-xl text-center"
         >
