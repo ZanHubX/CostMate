@@ -15,7 +15,11 @@ const NewItemList = () => {
   const handleAddButton = () => {
     if (newData.length > 0) {
       useStore.setState({ data: [...data, ...newData] });
-      localStorage.setItem("data", JSON.stringify([...data, ...newData]));
+
+      const storedData = JSON.parse(localStorage.getItem("data")) || [];
+      if (storedData.length > 0) {
+        localStorage.setItem("data", JSON.stringify([...data, ...newData]));
+      }
 
       // I want to go back to home page with react router dom not window location
       navigate("/");
