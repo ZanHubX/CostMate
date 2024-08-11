@@ -2,6 +2,7 @@ import useStore from "../store/useStore";
 import useNewItem from "../store/useNewItem";
 import { Link, redirect, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Empty from "./Empty";
 
 const NewItemList = () => {
   const location = useLocation();
@@ -46,6 +47,7 @@ const NewItemList = () => {
     <div className="border border-slate-100 p-4 rounded-xl mt-8">
       <div className="border border-slate-200 p-3 rounded-xl">
         <ul>
+          {newData.length === 0 && <Empty />}
           {newData.map((item) => (
             <li
               key={item.id}
@@ -78,9 +80,11 @@ const NewItemList = () => {
             </li>
           ))}
         </ul>
-        <p className="text-slate-50 text-right mt-3 mr-6 text-xl">
-          Total - {newData.reduce((acc, item) => acc + item.price, 0)} B
-        </p>
+        {newData.length == 0 || (
+          <p className="text-slate-50 text-right mt-3 mr-6 text-xl">
+            Total - {newData.reduce((acc, item) => acc + item.price, 0)} B
+          </p>
+        )}
       </div>
       <div className="grid grid-cols-2 gap-3 mt-4">
         <Link
