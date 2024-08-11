@@ -47,7 +47,7 @@ const View = () => {
       {/* Add Item Button */}
       <div
         className="flex justify-center items-center
-       gap-2 mt-5 border-slate-100 px-4 py-2 text-white"
+       gap-2  border-slate-100 px-4 py-2 text-white"
       >
         <div className="flex gap-3">
           <button className="text-slate-100 duration-100 active:scale-90 size-12">
