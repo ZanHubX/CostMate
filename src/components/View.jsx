@@ -1,26 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useStore from "../store/useStore";
 import Category from "./Category";
 import { Link } from "react-router-dom";
 import useNewItem from "../store/useNewItem";
 
 const View = () => {
-  const { data, setData } = useStore();
+  const { data } = useStore();
   const { newData } = useNewItem();
+  const storedData = JSON.parse(localStorage.getItem("data")) || [];
 
-  const [allData, setAllData] = useState(() => {
-    
-    const storedData = JSON.parse(localStorage.getItem("data")) || [];
-    return storedData;
-  });
+  const [allData, setAllData] = useState(storedData);
 
   useEffect(() => {
-    
-    if (data.length > 0) {
-      localStorage.setItem("data", JSON.stringify(data));
-      setAllData(data); 
-    }
-  }, [data]);
+    localStorage.setItem("data", JSON.stringify(data));
+    setAllData(data); // Set allData to the latest data from the store
+  }, [data]); // Listen to changes in data, not storedData
 
   const [selectedDate, setSelectedDate] = useState(() => {
     const today = new Date();
@@ -41,18 +35,18 @@ const View = () => {
   };
 
   const handleAddButton = () => {
-    
+    // Reset newData List to initial State
     newData.length = 0;
   };
 
-  const filteredItems = allData.filter((item) => item.date === selectedDate);
+  const filteredItems = allData.filter((item) => item.date == selectedDate);
 
   const total = filteredItems.reduce((sum, item) => sum + item.price, 0);
 
   return (
     <div className="mt-5">
-      
-      <div className="flex justify-between items-center border border-slate-100 px-4 py-2 rounded-xl">
+      {/* Date Display and Picker */}
+      <div className=" flex justify-between items-center border border-slate-100 px-4 py-2 rounded-xl">
         <p className="text-slate-100">{selectedDate}</p>
         <input
           type="date"
@@ -61,10 +55,10 @@ const View = () => {
         />
       </div>
 
-      
+      {/* Total and Items List */}
       <Category total={total} filteredItems={filteredItems} />
 
-      
+      {/* Add Item Button */}
       <div
         className="flex justify-center items-center
        gap-2  border-slate-100 px-4 py-2 text-white"
