@@ -3,6 +3,13 @@ import React from "react";
 import useDivided from "../store/useDivided";
 
 const Category = ({ total = 0, filteredItems = [] }) => {
+
+
+  const { setTotal } = useDivided((state) => ({
+    setTotal: state.setTotal,
+  }));
+
+
   return (
     <div className="border-2 mt-2 border-slate-100 px-4 py-2 rounded-xl">
       <div className="flex justify-between items-center border-b mt-2 border-slate-100 px-4 py-2">

@@ -5,6 +5,9 @@ import useDivided from "../store/useDivided";
 const Divided = () => {
   const total = useDivided((state) => state.total);
 
+
+  const setTotal = useDivided((state) => state.setTotal);
+
   const classes =
     "text-xl text-slate-100 border border-slate-200 p-4 rounded-2xl text-center";
 
