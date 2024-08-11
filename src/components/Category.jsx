@@ -1,9 +1,6 @@
-// Category.js
-import React from "react";
-import useDivided from "../store/useDivided";
-import Empty from "./Empty";
 import React, { useEffect } from "react";
 import useStore from "../store/useStore";
+import Empty from "./Empty";
 
 const Category = ({ filteredItems = [] }) => {
   const { total, setTotal } = useStore((state) => ({
@@ -12,14 +9,12 @@ const Category = ({ filteredItems = [] }) => {
   }));
 
   useEffect(() => {
-    
     const newTotal = filteredItems.reduce((sum, item) => sum + item.price, 0);
 
-    
     if (newTotal !== total) {
       setTotal(newTotal);
     }
-  }, [filteredItems, setTotal, total]); 
+  }, [filteredItems, setTotal]); // Removed `total` from dependency array
 
   return (
     <div className="border-2 mt-2 border-slate-100 px-4 py-2 rounded-xl">
