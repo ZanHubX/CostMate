@@ -6,6 +6,7 @@ import useNewItem from "../store/useNewItem";
 
 const View = () => {
   const { data } = useStore();
+  const { newData } = useNewItem();
 
   const [selectedDate, setSelectedDate] = useState(
     new Date().toLocaleDateString("en-GB", {
@@ -25,6 +26,10 @@ const View = () => {
     });
     setSelectedDate(newDate);
     dateRef.current = newDate;
+  };
+
+  const handleAddButton = () => {
+    newData.length = 0;
   };
 
   const filteredItems = data.filter((item) => item.date === dateRef.current);
@@ -52,7 +57,11 @@ const View = () => {
        gap-2  border-slate-100 px-4 py-2 text-white"
       >
         <div className="flex gap-3">
-          <button className="text-slate-100 duration-100 active:scale-90 size-12">
+          <Link
+            to={"/create"}
+            state={{ editData: filteredItems }}
+            className="text-slate-100 duration-100 active:scale-90 size-12"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -71,9 +80,10 @@ const View = () => {
                 d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
               />
             </svg>
-          </button>
+          </Link>
 
           <Link
+            onClick={handleAddButton}
             to={"/create"}
             className="text-slate-100 duration-100 active:scale-90 size-12"
           >

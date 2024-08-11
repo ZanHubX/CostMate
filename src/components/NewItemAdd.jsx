@@ -38,6 +38,7 @@ const NewItemAdd = () => {
       date: formatDate(selectedDate),
       category: itemName.current.value,
       price: +itemPrice.current.value,
+      editable: false,
     };
 
     if (itemName.current.value && itemPrice.current.value) {

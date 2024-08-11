@@ -3,7 +3,8 @@ import useNewItem from "../store/useNewItem";
 import { Link, redirect, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const NewItemList = () => {
+const NewItemList = ({ editData }) => {
+  console.log(editData);
   const { newData } = useNewItem();
   const { data } = useStore();
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const NewItemList = () => {
     }
 
     // Reset newData List to initial State
-    newData.length = 0;
+    // newData.length = 0;
   };
 
   const handleDeleteButton = (id) => {
