@@ -16,6 +16,7 @@ const Category = ({ filteredItems = [] }) => {
     }
   }, [filteredItems, setTotal]); // Removed `total` from dependency array
 
+const Category = ({ total = 0, filteredItems = [] }) => {
   return (
     <div className="border-2 mt-2 border-slate-100 px-4 py-2 rounded-xl">
       <div className="flex justify-between items-center border-b mt-2 border-slate-100 px-4 py-2">
@@ -36,6 +37,7 @@ const Category = ({ filteredItems = [] }) => {
       </ul>
     </div>
   );
+};
 };
 
 export default Category;
