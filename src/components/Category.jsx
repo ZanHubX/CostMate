@@ -1,26 +1,8 @@
 // Category.js
 import React from "react";
-import useDivided from "../store/useDivided";
 import Empty from "./Empty";
-import React, { useEffect } from "react";
-import useStore from "../store/useStore";
 
-const Category = ({ filteredItems = [] }) => {
-  const { total, setTotal } = useStore((state) => ({
-    total: state.total,
-    setTotal: state.setTotal,
-  }));
-
-  useEffect(() => {
-    
-    const newTotal = filteredItems.reduce((sum, item) => sum + item.price, 0);
-
-    
-    if (newTotal !== total) {
-      setTotal(newTotal);
-    }
-  }, [filteredItems, setTotal, total]); 
-
+const Category = ({ total = 0, filteredItems = [] }) => {
   return (
     <div className="border-2 mt-2 border-slate-100 px-4 py-2 rounded-xl">
       <div className="flex justify-between items-center border-b mt-2 border-slate-100 px-4 py-2">
