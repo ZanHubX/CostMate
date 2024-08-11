@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import useStore from "../store/useStore";
 import Category from "./Category";
+import { Link } from "react-router-dom";
+import useNewItem from "../store/useNewItem";
 
 const View = () => {
   const { data } = useStore();
@@ -71,7 +73,10 @@ const View = () => {
             </svg>
           </button>
 
-          <button className="text-slate-100 duration-100 active:scale-90 size-12">
+          <Link
+            to={"/create"}
+            className="text-slate-100 duration-100 active:scale-90 size-12"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -86,7 +91,7 @@ const View = () => {
                 d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
               />
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
     </div>
