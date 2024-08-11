@@ -3,7 +3,6 @@ import React from "react";
 import useDivided from "../store/useDivided";
 
 const Category = () => {
-
   const total = useDivided((state) => state.total);
   const filteredItems = useDivided((state) => state.filteredItems);
 
