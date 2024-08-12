@@ -16,6 +16,8 @@ const View = () => {
 
   const [allData, setAllData] = useState(storedData);
 
+  console.log(allData);
+
   useEffect(() => {
     if (data.length > 0) {
       setAllData(data);
@@ -40,7 +42,9 @@ const View = () => {
     setEditData(filteredItems);
   };
 
-  const filteredItems = allData.filter((item) => item.date === selectedDate);
+  const filteredItems = allData.filter((item) => {
+    return new Date(item.date).toDateString() === selectedDate.toDateString();
+  });
 
   // const total = filteredItems.reduce((sum, item) => sum + item.price, 0);
 
