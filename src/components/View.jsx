@@ -40,6 +40,7 @@ const View = () => {
   };
 
   const filteredItems = allData.filter((item) => item.date == selectedDate);
+  console.log(filteredItems);
 
   const total = filteredItems.reduce((sum, item) => sum + item.price, 0);
 
@@ -56,7 +57,7 @@ const View = () => {
       </div>
 
       {/* Total and Items List */}
-      <Category total={total} filteredItems={filteredItems} />
+      <Category filteredItems={filteredItems} />
 
       {/* Add Item Button */}
       <div
