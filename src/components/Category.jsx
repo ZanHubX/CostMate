@@ -3,10 +3,7 @@ import useStore from "../store/useStore";
 import Empty from "./Empty";
 
 const Category = ({ filteredItems = [] }) => {
-  const { total, setTotal } = useStore((state) => ({
-    total: state.total,
-    setTotal: state.setTotal,
-  }));
+  const { total, setTotal } = useStore();
 
   useEffect(() => {
     const newTotal = filteredItems.reduce((sum, item) => sum + item.price, 0);

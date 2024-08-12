@@ -44,7 +44,6 @@ const NewItemAdd = () => {
     };
 
     if (itemName.current.value && itemPrice.current.value) {
-      // addItem(newItem);
       addNewItem(newItem);
       addEditItem(newItem);
 

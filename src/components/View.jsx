@@ -9,11 +9,11 @@ const View = () => {
   const { newData } = useNewItem();
 
   const storedData = JSON.parse(localStorage.getItem("data")) || [];
+
   const [allData, setAllData] = useState(storedData);
 
   useEffect(() => {
     if (data.length > 0) {
-      localStorage.setItem("data", JSON.stringify(data));
       setAllData(data);
     }
   }, [data]);

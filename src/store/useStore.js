@@ -10,7 +10,7 @@ const useStore = create((set) => ({
       return { data: newData };
     }),
 
-  setTotal: (total) => set({ total }),
+  setTotal: (total) => set((state) => ({ total })),
 
   divideTotalByTwo: () => set((state) => ({ total: state.total / 2 })),
 }));
