@@ -4,6 +4,8 @@ import Category from "./Category";
 import { Link } from "react-router-dom";
 import useNewItem from "../store/useNewItem";
 import useEditItem from "../store/useEditItem";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/style.css";
 
 const View = () => {
   const { data } = useStore();
@@ -20,22 +22,14 @@ const View = () => {
     }
   }, [data]);
 
-  const [selectedDate, setSelectedDate] = useState(() => {
-    const today = new Date();
-    return today.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  });
+  const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with a Date object
+  const [isDatePickerVisible, setDatePickerVisible] = useState(false); // Manage visibility
 
-  const handleChange = (e) => {
-    const newDate = new Date(e.target.value).toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-    setSelectedDate(newDate);
+  const handleChange = (date) => {
+    if (date) {
+      setSelectedDate(date);
+      setDatePickerVisible(false); // Hide date picker after selection
+    }
   };
 
   const handleAddButton = () => {
@@ -52,14 +46,75 @@ const View = () => {
 
   return (
     <div className="mt-5">
-      <div className="flex justify-between items-center border border-slate-100 px-4 py-2 rounded-xl">
-        <p className="text-slate-100">{selectedDate}</p>
-        <input
-          type="date"
-          className="bg-transparent text-slate-100 focus:outline-none ::-webkit-calendar-picker-indicator:bg-black"
-          onChange={handleChange}
-        />
+      <div className="flex justify-between items-center border border-slate-100 px-4 py-2 rounded-xl bg-slate-800">
+        <p className="text-slate-100">
+          {selectedDate
+            ? selectedDate.toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })
+            : "Select a date"}
+        </p>
+        <button
+          onClick={() => setDatePickerVisible(!isDatePickerVisible)}
+          className="text-slate-100 bg-transparent border border-slate-200 rounded px-2 py-1"
+        >
+          {isDatePickerVisible ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
+            </svg>
+          ) : (
+            <span className="flex gap-2">
+              Select a date
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                />
+              </svg>
+            </span>
+          )}
+        </button>
       </div>
+      {isDatePickerVisible && (
+        <div className="absolute  left-1/2 translate-x-[-50%] mt-2 w-full max-w-sm bg-slate-800 border border-slate-200 rounded">
+          <DayPicker
+            mode="single"
+            // selected={selectedDate}
+            onSelect={handleChange}
+            footer={
+              selectedDate
+                ? `Selected: ${selectedDate.toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}`
+                : "Pick a day."
+            }
+            className="bg-slate-400 border border-slate-200 rounded p-4"
+          />
+        </div>
+      )}
 
       <Category filteredItems={filteredItems} />
 
