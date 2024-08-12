@@ -16,18 +16,31 @@ const EditItem = () => {
   const [editData, setEditData] = useState(initialData || []); // Fallback to an empty array if initialData is undefined
 
   console.log(editData);
-  const handleDeleteItem= (id) => {
-    setEditData(editData.filter((item) => item.id !== id));
-    localStorage.setItem("data", JSON.stringify(editData.filter((item) => item.id !== id)));
-  }
-  
-  
+  const handleAddButton = () => {
+    navigate("/");
+  };
 
-  
+  const handleDeleteButton = (id) => {
+    const storedData = JSON.parse(localStorage.getItem("data")) || [];
+    const newData = storedData.filter((item) => item.id !== id);
+
+    // Update localStorage
+    localStorage.setItem("data", JSON.stringify(newData));
+
+    // Update editData state
+    setEditData(newData);
+
+    // Optional: Update the global store if needed
+    data.setData(newData); // Assuming setData is a method in useStore to update the global data
+  };
 
   return (
     <div>
-      <ItemComponent newData={editData} handleDeleteButton={handleDeleteItem} />
+      <ItemComponent
+        newData={editData}
+        handleAddButton={handleAddButton}
+        handleDeleteButton={handleDeleteButton}
+      />
     </div>
   );
 };
