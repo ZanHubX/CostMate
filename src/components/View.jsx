@@ -3,10 +3,12 @@ import useStore from "../store/useStore";
 import Category from "./Category";
 import { Link } from "react-router-dom";
 import useNewItem from "../store/useNewItem";
+import useEditItem from "../store/useEditItem";
 
 const View = () => {
   const { data } = useStore();
   const { newData } = useNewItem();
+  const { newEditData, setEditData } = useEditItem();
 
   const storedData = JSON.parse(localStorage.getItem("data")) || [];
 
@@ -40,6 +42,10 @@ const View = () => {
     newData.length = 0;
   };
 
+  const handleEditButton = () => {
+    setEditData(filteredItems);
+  };
+
   const filteredItems = allData.filter((item) => item.date === selectedDate);
 
   // const total = filteredItems.reduce((sum, item) => sum + item.price, 0);
@@ -61,7 +67,8 @@ const View = () => {
         <div className="flex gap-3">
           <Link
             to={"/edit"}
-            state={{ editData: filteredItems }}
+            onClick={handleEditButton}
+            // state={{ editData: filteredItems }}
             className="text-slate-100 duration-100 active:scale-90 size-12"
           >
             <svg
