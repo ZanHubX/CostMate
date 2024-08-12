@@ -1,43 +1,41 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ItemComponent from "./ItemComponent";
-import useStore from "../store/useStore";
-import useNewItem from "../store/useNewItem";
+import useEditItem from "../store/useEditItem";
 
 const EditItem = () => {
-  const { data } = useStore(); // Ensure that useStore provides setData to update the global store
-  const { newEditData } = useNewItem();
-
   const location = useLocation();
   const navigate = useNavigate();
-  const { editData: initialData } = location.state || {};
+  const { newEditData } = useEditItem();
 
-  // Use state to manage editData
-  const [editData, setEditData] = useState(initialData || []); // Fallback to an empty array if initialData is undefined
+  console.log(newEditData);
 
-  console.log(editData);
   const handleAddButton = () => {
     navigate("/");
   };
 
   const handleDeleteButton = (id) => {
-    const storedData = JSON.parse(localStorage.getItem("data")) || [];
-    const newData = storedData.filter((item) => item.id !== id);
+    if (confirm("Are you sure you want to delete this item?")) {
+      const newDataList = newEditData.filter((item) => item.id !== id);
+      useEditItem.setState({ newEditData: newDataList });
 
-    // Update localStorage
-    localStorage.setItem("data", JSON.stringify(newData));
+      const storedData = JSON.parse(localStorage.getItem("data")) || [];
 
-    // Update editData state
-    setEditData(newData);
+      localStorage.setItem(
+        "data",
+        JSON.stringify(storedData.filter((item) => item.id !== id))
+      );
+    }
 
-    // Optional: Update the global store if needed
-    // data.setData(newData); // Assuming setData is a method in useStore to update the global data
+    // TODO: will use later
+    // useStore.setState({ data: newDataList }); // Update data state
+    // localStorage.setItem("data", JSON.stringify(newDataList)); // Update local storage
   };
 
   return (
     <div>
       <ItemComponent
-        newData={editData}
+        newData={newEditData}
         handleAddButton={handleAddButton}
         handleDeleteButton={handleDeleteButton}
       />
