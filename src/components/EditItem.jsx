@@ -31,7 +31,7 @@ const EditItem = () => {
     setEditData(newData);
 
     // Optional: Update the global store if needed
-    data.setData(newData); // Assuming setData is a method in useStore to update the global data
+    // data.setData(newData); // Assuming setData is a method in useStore to update the global data
   };
 
   return (
