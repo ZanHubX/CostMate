@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useStore from "../store/useStore";
 
 const Total = () => {
-  const total = useStore((state) => state.total);
-  
+  const { data } = useStore();
+
+
+  const storedData = JSON.parse(localStorage.getItem("data")) || [];
+  const [total,setTotal] = useState(
+    storedData.reduce((sum, item) => sum + item.price, 0)
+  );
+
+  useEffect(() => {
+    
+    localStorage.setItem("data", JSON.stringify(data));
+    setTotal(data.reduce((sum, item) => sum + item.price, 0));
+  }, [data]);
 
   return (
     <section className="px-10 py-6">
