@@ -4,16 +4,13 @@ import useStore from "../store/useStore";
 const Total = () => {
   const { data } = useStore();
 
-
   const storedData = JSON.parse(localStorage.getItem("data")) || [];
-  const [total,setTotal] = useState(
-    storedData.reduce((sum, item) => sum + item.price, 0)
-  );
+
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    
-    localStorage.setItem("data", JSON.stringify(data));
-    setTotal(data.reduce((sum, item) => sum + item.price, 0));
+    const newTotal = storedData.reduce((sum, item) => sum + item.price, 0);
+    setTotal(newTotal);
   }, [data]);
 
   return (

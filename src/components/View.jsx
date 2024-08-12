@@ -8,19 +8,16 @@ const View = () => {
   const { data } = useStore();
   const { newData } = useNewItem();
 
-  
   const storedData = JSON.parse(localStorage.getItem("data")) || [];
   const [allData, setAllData] = useState(storedData);
 
   useEffect(() => {
-    
     if (data.length > 0) {
       localStorage.setItem("data", JSON.stringify(data));
       setAllData(data);
     }
   }, [data]);
 
- 
   const [selectedDate, setSelectedDate] = useState(() => {
     const today = new Date();
     return today.toLocaleDateString("en-GB", {
@@ -30,7 +27,6 @@ const View = () => {
     });
   });
 
- 
   const handleChange = (e) => {
     const newDate = new Date(e.target.value).toLocaleDateString("en-GB", {
       day: "2-digit",
@@ -44,15 +40,12 @@ const View = () => {
     newData.length = 0;
   };
 
-  
   const filteredItems = allData.filter((item) => item.date === selectedDate);
-  console.log(filteredItems);
 
-  const total = filteredItems.reduce((sum, item) => sum + item.price, 0);
+  // const total = filteredItems.reduce((sum, item) => sum + item.price, 0);
 
   return (
     <div className="mt-5">
-      
       <div className="flex justify-between items-center border border-slate-100 px-4 py-2 rounded-xl">
         <p className="text-slate-100">{selectedDate}</p>
         <input
@@ -64,11 +57,10 @@ const View = () => {
 
       <Category filteredItems={filteredItems} />
 
-      
       <div className="flex justify-center items-center gap-2 border-slate-100 px-4 py-2 text-white">
         <div className="flex gap-3">
           <Link
-            to={"/create"}
+            to={"/edit"}
             state={{ editData: filteredItems }}
             className="text-slate-100 duration-100 active:scale-90 size-12"
           >

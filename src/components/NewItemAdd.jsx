@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import useStore from "../store/useStore";
 import useNewItem from "../store/useNewItem";
+import useEditItem from "../store/useEditItem";
 
 // Function to get today's date in YYYY-MM-DD format
 const getTodayDate = () => {
@@ -22,6 +23,7 @@ const formatDate = (date) => {
 const NewItemAdd = () => {
   const { addItem, data } = useStore();
   const { addNewItem, newData } = useNewItem();
+  const { addEditItem } = useEditItem();
 
   const itemName = useRef();
   const itemPrice = useRef();
@@ -44,6 +46,14 @@ const NewItemAdd = () => {
     if (itemName.current.value && itemPrice.current.value) {
       // addItem(newItem);
       addNewItem(newItem);
+      addEditItem(newItem);
+
+      // Update local storage
+      const storedData = JSON.parse(localStorage.getItem("data")) || [];
+      if (!storedData.includes(newItem.id)) {
+        localStorage.setItem("data", JSON.stringify([...storedData, newItem]));
+      }
+
       itemName.current.value = "";
       itemPrice.current.value = "";
     }
