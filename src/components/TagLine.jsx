@@ -24,7 +24,7 @@ const TagLine = () => {
   //   "လွယ်ကူသော အသုံးစရိတ် ခြေရာခံခြင်း",
   // ];
   return (
-    <p className="text-slate-100 font-myanmar px-6 font-logo  text-sm  py-3 bg-gradient-to-tr from-slate-800 to-slate-900">
+    <p className="text-slate-100 text-center px-6 font-logo align-center justify-center text-sm  py-3 bg-gradient-to-tr from-slate-800 to-slate-900">
       {expenseTrackerTaglines[Math.floor(Math.random() * 10)]}
     </p>
   );
