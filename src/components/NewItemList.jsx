@@ -19,9 +19,22 @@ const NewItemList = () => {
       useStore.setState({ data: [...data, ...newData] });
       navigate("/");
     } else {
-      if (confirm("Are you sure you want to go home page?")) {
-        navigate("/");
-      }
+      Swal.fire({
+        title: "No items was added",
+        text: "Are you sure you want to save?",
+        icon: "warning",
+        iconColor: "#2a475e",
+        color: "#2a475e",
+        showCancelButton: true,
+        background: "#c7d5e0",
+        confirmButtonColor: "#15803D",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Save",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/");
+        }
+      });
     }
   };
 

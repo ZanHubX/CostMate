@@ -7,7 +7,6 @@ import useEditItem from "../store/useEditItem";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import getItemAsync from "../utils/getItemAsync";
-
 const View = () => {
   const { data } = useStore();
   const { newData } = useNewItem();
@@ -49,9 +48,13 @@ const View = () => {
     setEditData(filteredItems);
   };
 
-  const filteredItems = allData.filter((item) => {
-    return new Date(item.date).toDateString() === selectedDate.toDateString();
-  });
+  const filteredItems = allData
+    ? allData.filter((item) => {
+        return (
+          new Date(item.date).toDateString() === selectedDate.toDateString()
+        );
+      })
+    : console.log("No data found");
 
   // const total = filteredItems.reduce((sum, item) => sum + item.price, 0);
 
