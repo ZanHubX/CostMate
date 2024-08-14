@@ -3,10 +3,14 @@ import CostMateLogo from "/CostMate.png";
 const NavBar = () => {
   return (
     <nav className="flex justify-between items-center border-b border-r-slate-200 mb-4  z-10">
-      <img className="w-1/4 md:2/5 " src={CostMateLogo} alt="Our Logo" />
+      <img
+        className="w-2/5 sm:w-2/5 md:w-1/5 lg:w-1/4"
+        src={CostMateLogo}
+        alt="Our Logo"
+      />
       {/* <h1 className="text-2xl font-light text-slate-100 font-logo">COSTMATE</h1> */}
       {/* <p className="text-slate-300 justify-center">Good morning...</p> */}
-      <button className="w-[40px] text-slate-100 mr-3">
+      <button className="w-[40px] text-slate-100 mr-5">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
