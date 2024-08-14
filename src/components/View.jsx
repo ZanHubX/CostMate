@@ -4,8 +4,8 @@ import Category from "./Category";
 import { Link } from "react-router-dom";
 import useNewItem from "../store/useNewItem";
 import useEditItem from "../store/useEditItem";
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/style.css";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 const View = () => {
   const { data } = useStore();
@@ -101,8 +101,14 @@ const View = () => {
         </button>
       </div>
       {isDatePickerVisible && (
-        <div className="absolute  left-1/2 translate-x-[-50%] mt-2 w-full max-w-sm bg-slate-800 border border-slate-200 rounded">
-          <DayPicker
+        <Calendar
+          value={selectedDate}
+          onChange={handleChange}
+          className={"rounded-lg"}
+        />
+      )}
+      {/* <div className="absolute  left-1/2 translate-x-[-50%] mt-2 w-full max-w-sm bg-slate-800 border border-slate-200 rounded"> */}
+      {/* <DayPicker
             mode="single"
             // selected={selectedDate}
             onSelect={handleChange}
@@ -116,12 +122,10 @@ const View = () => {
                 : "Pick a day."
             }
             className="bg-slate-400 border border-slate-200 rounded p-4"
-          />
-        </div>
-      )}
+          /> */}
+      {/* </div> */}
 
       <Category filteredItems={filteredItems} />
-
       <div className="flex justify-center items-center gap-2 border-slate-100 px-4 py-2 text-white">
         <div className="flex gap-3">
           <Link
