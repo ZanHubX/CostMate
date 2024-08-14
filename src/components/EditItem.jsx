@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ItemComponent from "./ItemComponent";
 import useEditItem from "../store/useEditItem";
+import toast, { Toaster } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const EditItem = () => {
   const location = useLocation();
@@ -15,17 +17,43 @@ const EditItem = () => {
   };
 
   const handleDeleteButton = (id) => {
-    if (confirm("Are you sure you want to delete this item?")) {
-      const newDataList = newEditData.filter((item) => item.id !== id);
-      useEditItem.setState({ newEditData: newDataList });
+    Swal.fire({
+      title: "Are you sure to delete this item?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      iconColor: "#2a475e",
+      color: "#2a475e",
+      showCancelButton: true,
+      background: "#c7d5e0",
+      confirmButtonColor: "#15803D",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        toast.success("Item deleted successfully");
+        const newDataList = newEditData.filter((item) => item.id !== id);
+        useEditItem.setState({ newEditData: newDataList });
 
-      const storedData = JSON.parse(localStorage.getItem("data")) || [];
+        const storedData = JSON.parse(localStorage.getItem("data")) || [];
 
-      localStorage.setItem(
-        "data",
-        JSON.stringify(storedData.filter((item) => item.id !== id))
-      );
-    }
+        localStorage.setItem(
+          "data",
+          JSON.stringify(storedData.filter((item) => item.id !== id))
+        );
+      }
+    });
+    // if (confirm("Are you sure you want to delete this item?")) {
+    //   toast.success("Item deleted successfully");
+    //   const newDataList = newEditData.filter((item) => item.id !== id);
+    //   useEditItem.setState({ newEditData: newDataList });
+
+    //   const storedData = JSON.parse(localStorage.getItem("data")) || [];
+
+    //   localStorage.setItem(
+    //     "data",
+    //     JSON.stringify(storedData.filter((item) => item.id !== id))
+    //   );
+    // }
 
     // TODO: will use later
     // useStore.setState({ data: newDataList }); // Update data state
@@ -39,6 +67,7 @@ const EditItem = () => {
         handleAddButton={handleAddButton}
         handleDeleteButton={handleDeleteButton}
       />
+      <Toaster />
     </div>
   );
 };

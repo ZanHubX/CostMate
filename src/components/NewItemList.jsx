@@ -4,6 +4,8 @@ import ItemComponent from "./ItemComponent";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Empty from "./Empty";
+import toast, { Toaster } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const NewItemList = () => {
   const navigate = useNavigate();
@@ -24,17 +26,43 @@ const NewItemList = () => {
   };
 
   const handleDeleteButton = (id) => {
-    if (confirm("Are you sure you want to delete this item?")) {
-      const newDataList = newData.filter((item) => item.id !== id);
-      useNewItem.setState({ newData: newDataList });
+    Swal.fire({
+      title: "Are you sure to delete this item?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      iconColor: "#2a475e",
+      color: "#2a475e",
+      showCancelButton: true,
+      background: "#c7d5e0",
+      confirmButtonColor: "#15803D",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const newDataList = newData.filter((item) => item.id !== id);
+        useNewItem.setState({ newData: newDataList });
+        toast.success("Item deleted successfully");
 
-      const storedData = JSON.parse(localStorage.getItem("data")) || [];
+        const storedData = JSON.parse(localStorage.getItem("data")) || [];
 
-      localStorage.setItem(
-        "data",
-        JSON.stringify(storedData.filter((item) => item.id !== id))
-      );
-    }
+        localStorage.setItem(
+          "data",
+          JSON.stringify(storedData.filter((item) => item.id !== id))
+        );
+      }
+    });
+    // if (Swal) {
+    //   const newDataList = newData.filter((item) => item.id !== id);
+    //   useNewItem.setState({ newData: newDataList });
+    //   toast.success("Item deleted successfully");
+
+    //   const storedData = JSON.parse(localStorage.getItem("data")) || [];
+
+    //   localStorage.setItem(
+    //     "data",
+    //     JSON.stringify(storedData.filter((item) => item.id !== id))
+    //   );
+    // }
   };
 
   return (
@@ -44,6 +72,7 @@ const NewItemList = () => {
         handleDeleteButton={handleDeleteButton}
         handleAddButton={handleAddButton}
       />
+      <Toaster />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import Modal from "./components/Modal";
 import NavBar from "./components/NavBar";
 import TagLine from "./components/TagLine";
 import Total from "./components/Total";
+import toast, { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Total />
       <Divided />
       <Dashboard />
+      <Toaster />
     </div>
   );
 };

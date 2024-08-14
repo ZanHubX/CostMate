@@ -6,6 +6,7 @@ import useNewItem from "../store/useNewItem";
 import useEditItem from "../store/useEditItem";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import getItemAsync from "../utils/getItemAsync";
 
 const View = () => {
   const { data } = useStore();
@@ -19,9 +20,15 @@ const View = () => {
   console.log(allData);
 
   useEffect(() => {
-    if (data.length > 0) {
-      setAllData(data);
-    }
+    const fetchData = async () => {
+      const storedData = await getItemAsync("data");
+      setAllData(storedData);
+    };
+
+    fetchData();
+    // if (data.length > 0) {
+    //   setAllData(data);
+    // }
   }, [data]);
 
   const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with a Date object
