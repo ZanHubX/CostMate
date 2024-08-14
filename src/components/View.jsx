@@ -7,7 +7,6 @@ import useEditItem from "../store/useEditItem";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import getItemAsync from "../utils/getItemAsync";
-
 const View = () => {
   const { data } = useStore();
   const { newData } = useNewItem();
