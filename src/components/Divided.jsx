@@ -1,6 +1,3 @@
-
-
-
 import React from "react";
 import useStore from "../store/useStore";
 
@@ -20,7 +17,7 @@ const Divided = () => {
         className={classes}
         onClick={divideTotalByTwo} // Handle button click
       >
-        Divided By
+        Amount
       </button>
       <input
         type="text"
