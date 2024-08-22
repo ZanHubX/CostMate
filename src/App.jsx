@@ -1,19 +1,10 @@
-import Dashboard from "./components/Dashboard";
-import Divided from "./components/Divided";
-import Modal from "./components/Modal";
-import NavBar from "./components/NavBar";
-import TagLine from "./components/TagLine";
-import Total from "./components/Total";
-import toast, { Toaster } from "react-hot-toast";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/router";
 
 const App = () => {
   return (
     <div>
-      <TagLine />
-      <Total />
-      <Divided />
-      <Dashboard />
-      <Toaster />
+      <RouterProvider router={router} />
     </div>
   );
 };

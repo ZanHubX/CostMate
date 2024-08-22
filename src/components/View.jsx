@@ -114,7 +114,9 @@ const View = () => {
         <Calendar
           value={selectedDate}
           onChange={handleChange}
-          className={"rounded-lg"}
+          className={
+            "rounded-lg absolute bottom-[280px] right-1/2 translate-x-[50%] sm:bottom-[250px] sm:right-[40%] md:bottom-[280px]  "
+          }
         />
       )}
       {/* <div className="absolute  left-1/2 translate-x-[-50%] mt-2 w-full max-w-sm bg-slate-800 border border-slate-200 rounded"> */}
