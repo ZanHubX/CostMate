@@ -8,6 +8,7 @@ const Divided = () => {
 
   const storedData = JSON.parse(localStorage.getItem("data")) || [];
 
+<<<<<<< Updated upstream
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
@@ -15,6 +16,8 @@ const Divided = () => {
     setTotal(newTotal);
   }, [data]);
 
+=======
+>>>>>>> Stashed changes
   const classes =
     "text-xl text-slate-100 border border-slate-200 p-4 rounded-2xl text-center";
 
